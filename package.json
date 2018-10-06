@@ -1,0 +1,23 @@
+{
+  "name": "project_github_commit_feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikingeducation/project_github_commit_feed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vikingeducation/project_github_commit_feed/issues"
+  },
+  "homepage": "https://github.com/vikingeducation/project_github_commit_feed#readme",
+  "dependencies": {
+    "@octokit/rest": "^15.12.1",
+    "dotenv": "^6.0.0"
+  }
+}
