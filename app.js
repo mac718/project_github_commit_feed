@@ -4,7 +4,22 @@ const url = require('url');
 const fs = require('fs');
 const commitFeed = require('./data/commits.json');
 
+var _extractParams = (req) => {
+  let urlObj = url.parse(req.url);
+  let params = urlObj.query.split('&');
+  params = params.map(param => {
+    splitParam = param.split('=');
+    param = new Object();
+    param[splitParam[0]] = splitParam[1];
+    console.log(param);
+    return param;
+  });
+  return params; 
+}
+
 const server = http.createServer((req, res) => {
+  _extractParams(req);
+
   fs.readFile('./public/index.html', (err, data) => {
     if (err) {
       res.statusCode = 404;
