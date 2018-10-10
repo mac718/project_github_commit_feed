@@ -1,16 +1,1 @@
-{
-  "Foobar": {
-    "foobar": [
-      {
-        "message": "Update README.md",
-        "author": {
-          "name": "Foobar",
-          "email": "foobar@email.com",
-          "date": "2017-02-16T19:25:15Z"
-        },
-        "url": "https://github.com/Foobar/foobar/commit/20ad02f81024c7dc9bff6da3d8e996725203923e",
-        "sha": "20ad02f81024c7dc9bff6da3d8e996725203923e"
-      }
-    ]
-  }
-}
+[{"message":"minor changes","name":{"name":"Michael Coon","email":"mac718@gmail.com","date":"2018-10-03T20:58:22Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/65a97da6b1faabf40cd4f07f0995f0b2acb6dcb5","sha":"71ffa78b3e78031d7adfb29064ac4cb7b33fcc46"},{"message":"Small changes","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-10-03T13:37:24Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/9723d0e3f120f89b793eea3d66c92c41cdd76236","sha":"a7a4131ec84ec35450a45d4ca8cbadfaaa3bb427"},{"message":"Enable parsing of post data","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-10-02T20:25:51Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/39ed7d2439880e0736b852e9dc5d2ada597892e8","sha":"288d38f8806fde02d6f762adfe12819eb73c5b4b"},{"message":"Enable post requests","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-10-02T20:08:49Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/226fd696f8f3fa485bc9f3d76bc6f6841a78b5e3","sha":"86b8c32c1f86c35365a5cac561efe5ffcd2b8256"},{"message":"Set up path parsing and parameterized routing","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-09-30T22:47:03Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/e952832c12450047703946bb9b6af1065401e0eb","sha":"45633541770c00801816e4d95bdcb7f7678851c1"},{"message":"Restructure express module","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-09-29T01:30:22Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/03306be41a050acf4aa4e6f5bb1819a43b4cd410","sha":"e9e464469f53bdb79ad210103de5f93779de57af"},{"message":"initial commit","name":{"name":"mac718","email":"mac718@gmail.com","date":"2018-09-26T14:05:37Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/50b18a3b828c9c3c13bb31dbdcf46b540aebf05f","sha":"e0e589e0cdb0210fdb50a170147483be8c4ddba0"},{"message":"Update README.md","name":{"name":"Chris Scavello","email":"bideowego@gmail.com","date":"2017-03-05T23:32:57Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/33034e9cde72528af78906518180c5131558dfb8","sha":"f796d32c478714824c0af056309ee22235d4a129"},{"message":"Initial commit","name":{"name":"Chris Scavello","email":"bideowego@gmail.com","date":"2017-03-05T23:32:22Z"},"url":"https://api.github.com/repos/mac718/assignment_building_the_express_router/git/commits/fe5365860413daa56107e7acc55ce85f83b57045","sha":"2faa55c32bbb0c93cec7add6fda9e4bacce7f28a"}]

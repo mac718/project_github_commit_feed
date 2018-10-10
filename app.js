@@ -2,7 +2,8 @@ const wrapper = require('./lib/wrapper');
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-const commitFeed = require('./data/commits.json');
+var commitFeed = require('./data/commits');
+
 
 var _extractParams = (req) => {
   let urlObj = url.parse(req.url);
@@ -11,15 +12,21 @@ var _extractParams = (req) => {
     splitParam = param.split('=');
     param = new Object();
     param[splitParam[0]] = splitParam[1];
-    console.log(param);
     return param;
   });
+  //console.log(params);
   return params; 
 }
 
 const server = http.createServer((req, res) => {
-  _extractParams(req);
+  console.log(req.url);
+  if (req.url != '/'){
+    let params = _extractParams(req);
+    wrapper.authenticate();
+    wrapper.getCommits(params[0].name, params[1].repo)
+  }
 
+  
   fs.readFile('./public/index.html', (err, data) => {
     if (err) {
       res.statusCode = 404;
