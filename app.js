@@ -37,8 +37,8 @@ var _extractPostData = (req, done) => {
 }
 
 const server = http.createServer((req, res) => {
-  console.log(url.parse(req.url).pathname);
-  if (req.url = '/github/webhooks') {
+  //console.log(url.parse(req.url).pathname);
+  if (req.url == '/github/webhooks') {
     let p = new Promise(resolve => {
       _extractPostData(req, resolve());
     })
@@ -47,7 +47,7 @@ const server = http.createServer((req, res) => {
     })
   }
   let commitFeed;
-  if (req.url != '/'){
+  if (url.parse(req.url).pathname != '/'){
     let params = _extractParams(req);
     wrapper.authenticate();
     wrapper.getCommits(params[0].name, params[1].repo).then(result => {
@@ -59,7 +59,7 @@ const server = http.createServer((req, res) => {
           res.statusMessage = 'Not Found';
           throw err;
         } else {  
-          res.writeHead(200, _headers);
+          //res.writeHead(200, _headers);
           let body = data.toString().replace("{{commitFeed}}", commitFeed);
           res.end(body);
         }
@@ -83,6 +83,6 @@ const server = http.createServer((req, res) => {
   }
 })
 
-server.listen(3001, 'localhost', () => {
+server.listen(3000, 'localhost', () => {
   console.log('listening');
 });
