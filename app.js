@@ -36,7 +36,7 @@ var _extractPostData = (req, done) => {
 }
 
 const server = http.createServer((req, res) => {
-  console.log(JSON.parse(req.url).pathname);
+  console.log(url.parse(req.url).pathname);
   if (req.url = '/github/webhooks') {
     let p = new Promise(resolve => {
       _extractPostData(req, resolve());
