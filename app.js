@@ -5,6 +5,13 @@ const fs = require('fs');
 //var commitFeed = require('./data/commits');
 
 
+var _headers = {
+  "Content-Type": "text/html",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE"
+}
+
 var _extractParams = (req) => {
   let urlObj = url.parse(req.url);
   let params = urlObj.query.split('&');
@@ -17,8 +24,26 @@ var _extractParams = (req) => {
   return params; 
 }
 
+var _extractPostData = (req, done) => {
+  let body = '';
+  req.on('data', data =>{ 
+    body += data;
+  });
+  req.on('end', () => {
+    req.body = body;
+    done();
+  });
+}
+
 const server = http.createServer((req, res) => {
-  console.log(req.url);
+  if (req.url = '/github/webhooks') {
+    let p = new Promise(resolve => {
+      _extractParams(req, resolve());
+    })
+    p.then(() => {
+      console.log(req.body);
+    })
+  }
   let commitFeed;
   if (req.url != '/'){
     let params = _extractParams(req);
@@ -32,10 +57,7 @@ const server = http.createServer((req, res) => {
           res.statusMessage = 'Not Found';
           throw err;
         } else {  
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'text/html');
-          console.log('butts');
-          //commitFeed = JSON.stringify(commitFeed, null, 2);
+          res.writeHead(200, _headers);
           let body = data.toString().replace("{{commitFeed}}", commitFeed);
           res.end(body);
         }
