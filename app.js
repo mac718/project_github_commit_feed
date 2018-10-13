@@ -2,7 +2,7 @@ const wrapper = require('./lib/wrapper');
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-var commitFeed = require('./data/commits');
+//var commitFeed = require('./data/commits');
 
 
 var _extractParams = (req) => {
@@ -14,32 +14,49 @@ var _extractParams = (req) => {
     param[splitParam[0]] = splitParam[1];
     return param;
   });
-  //console.log(params);
   return params; 
 }
 
 const server = http.createServer((req, res) => {
   console.log(req.url);
+  let commitFeed;
   if (req.url != '/'){
     let params = _extractParams(req);
     wrapper.authenticate();
-    wrapper.getCommits(params[0].name, params[1].repo)
+    wrapper.getCommits(params[0].name, params[1].repo).then(result => {
+      console.log('promise');
+      commitFeed = JSON.stringify(JSON.parse(result), null, 2);
+      fs.readFile('./public/index.html', (err, data) => {
+        if (err) {
+          res.statusCode = 404;
+          res.statusMessage = 'Not Found';
+          throw err;
+        } else {  
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'text/html');
+          console.log('butts');
+          //commitFeed = JSON.stringify(commitFeed, null, 2);
+          let body = data.toString().replace("{{commitFeed}}", commitFeed);
+          res.end(body);
+        }
+      })
+    });
+  } else {
+    fs.readFile('./public/index.html', (err, data) => {
+      if (err) {
+        res.statusCode = 404;
+        res.statusMessage = 'Not Found';
+        throw err;
+      } else {  
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html');
+        console.log('butts');
+        commitFeed = JSON.stringify(require('./data/commits'), null, 2);
+        let body = data.toString().replace("{{commitFeed}}", commitFeed);
+        res.end(body);
+      }
+    })
   }
-
-  
-  fs.readFile('./public/index.html', (err, data) => {
-    if (err) {
-      res.statusCode = 404;
-      res.statusMessage = 'Not Found';
-      throw err;
-    } else {  
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/html');
-      let dummyFeed = JSON.stringify(commitFeed, null, 2);
-      let body = data.toString().replace("{{commitFeed}}", dummyFeed);
-      res.end(body);
-    }
-  })
 })
 
 server.listen(3000, 'localhost', () => {
