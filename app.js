@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
       _extractParams(req, resolve());
     })
     p.then(() => {
-      console.log(req.body);
+      //console.log(req.body);
     })
   }
   let commitFeed;
