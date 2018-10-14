@@ -37,17 +37,9 @@ var _extractPostData = (req, done) => {
 }
 
 const server = http.createServer((req, res) => {
-  console.log(url.parse(req.url).pathname);
-  if (url.parse(req.url).pathname == '/github/webhooks') {
-    let p = new Promise(resolve => {
-      _extractPostData(req, resolve());
-    })
-    p.then(() => {
-      console.log(req.body);
-    })
-  }
-  let commitFeed;
-  if (url.parse(req.url).pathname != '/'){
+  let path = url.parse(req.url).pathname;
+
+  if (path === '/') {
     let params = _extractParams(req);
     wrapper.authenticate();
     wrapper.getCommits(params[0].name, params[1].repo).then(result => {
@@ -65,7 +57,7 @@ const server = http.createServer((req, res) => {
         }
       })
     });
-  } else {
+  } else if (path === '/commit') {
     fs.readFile('./public/index.html', (err, data) => {
       if (err) {
         res.statusCode = 404;
@@ -80,8 +72,29 @@ const server = http.createServer((req, res) => {
         res.end(body);
       }
     })
-  }
-})
+  } else if (path === '/github/webhooks') {
+    let p = new Promise(resolve => {
+      _extractPostData(req, resolve());
+    })
+    p.then(() => {
+      console.log(req.body);
+    })
+  } else {
+    res.statusCode = 404;
+    res.statusMessage = 'Not Found';
+  };
+
+//   console.log(url.parse(req.url).pathname);
+//   if (url.parse(req.url).pathname == '/github/webhooks') {
+    
+//   }
+//   let commitFeed;
+//   if (url.parse(req.url).pathname != '/'){
+    
+//   } else {
+    
+//   }
+// })
 
 server.listen(3000, 'localhost', () => {
   console.log('listening');
