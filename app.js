@@ -31,6 +31,7 @@ var _extractPostData = (req, done) => {
     body += data;
   });
   req.on('end', () => {
+    res.writeHead(200, _headers);
     req.body = JSON.parse(body.slice(8));
     done();
   });
