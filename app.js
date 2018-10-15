@@ -76,11 +76,11 @@ const server = http.createServer((req, res) => {
       _extractPostData(req, resolve);
     })
     p.then(() => {
-      let webhookData = JSON.parse(req.body.slice(8));
+      let webhookData = url.parse(req.body.slice(8));
       let userName = webhookData.pusher.name;
       let repo = webhookData.repository.name;
 
-      console.log(webhookData, userName, repo);
+      console.log(webhookData);
     })
   } else {
     res.statusCode = 404;
