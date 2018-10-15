@@ -25,12 +25,13 @@ var _extractParams = (req) => {
   return params; 
 }
 
-var _extractPostData = (req, done) => {
+var _extractPostData = (req, res, done) => {
   let body = '';
   req.on('data', data =>{ 
     body += data;
   });
   req.on('end', () => {
+    res.writeHead(200, _headers);
     req.body = JSON.parse(JSON.stringify(body.slice(8)));
     done();
   });
@@ -72,9 +73,8 @@ const server = http.createServer((req, res) => {
       }
     })
   } else if (path === '/github/webhooks') {
-    res.writeHead(200, _headers);
     let p = new Promise(resolve => {
-      _extractPostData(req, resolve);
+      _extractPostData(req, res, resolve);
     })
     p.then(() => {
       let webhookData = req.body;
