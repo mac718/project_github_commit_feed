@@ -66,7 +66,6 @@ const server = http.createServer((req, res) => {
       } else {  
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
-        console.log('butts');
         commitFeed = JSON.stringify(require('./data/commits'), null, 2);
         let body = data.toString().replace("{{commitFeed}}", commitFeed);
         res.end(body);
@@ -77,7 +76,11 @@ const server = http.createServer((req, res) => {
       _extractPostData(req, resolve);
     })
     p.then(() => {
-      console.log(req.body);
+      let webhookData = JSON.parse(req.body.slice(8));
+      let userName = webhookData.pusher.name;
+      let repo = webhookData.repository.name;
+
+      console.log(webhookData, userName, repo);
     })
   } else {
     res.statusCode = 404;
