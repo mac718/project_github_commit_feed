@@ -31,7 +31,7 @@ var _extractPostData = (req, done) => {
     body += data;
   });
   req.on('end', () => {
-    req.body = body;
+    req.body = JSON.parse(body.slice(8));
     done();
   });
 }
@@ -76,7 +76,7 @@ const server = http.createServer((req, res) => {
       _extractPostData(req, resolve);
     })
     p.then(() => {
-      let webhookData = url.parse(req.body.slice(8));
+      let webhookData = req.body;
       let userName = webhookData.pusher.name;
       let repo = webhookData.repository.name;
 
