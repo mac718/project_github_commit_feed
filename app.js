@@ -31,7 +31,7 @@ var _extractPostData = (req, done) => {
     body += data;
   });
   req.on('end', () => {
-    req.body = JSON.parse(body);
+    req.body = JSON.parse(JSON.stringify(body.slice(8)));
     done();
   });
 }
