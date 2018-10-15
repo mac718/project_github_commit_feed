@@ -74,7 +74,7 @@ const server = http.createServer((req, res) => {
     })
   } else if (path === '/github/webhooks') {
     let p = new Promise(resolve => {
-      _extractPostData(req);
+      resolve(_extractPostData(req));
     })
     p.then(() => {
       console.log(req.body);
