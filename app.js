@@ -78,8 +78,8 @@ const server = http.createServer((req, res) => {
     })
     p.then(() => {
       let webhookData = req.body;
-      let userName = webhookData.pusher.name;
-      let repo = webhookData.repository.name;
+      //let userName = webhookData.pusher.name;
+      //let repo = webhookData.repository.name;
 
       console.log(webhookData);
     })
