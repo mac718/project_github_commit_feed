@@ -27,7 +27,7 @@ var _extractParams = (req) => {
 
 var _extractPostData = (req, res, done) => {
   let body = '';
-  req.on('data', data =>{ 
+  req.on('data', data => { 
     body += data;
   });
   req.on('end', () => {
