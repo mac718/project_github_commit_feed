@@ -40,7 +40,7 @@ var _extractPostData = (req, res, done) => {
 const server = http.createServer((req, res) => {
   let path = url.parse(req.url).pathname;
 
-  if (path === '/') {
+  if (path === '/commits') {
     let params = _extractParams(req);
     wrapper.authenticate();
     wrapper.getCommits(params[0].name, params[1].repo).then(result => {
@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
         }
       })
     });
-  } else if (path === '/commit') {
+  } else if (path === '/') {
     fs.readFile('./public/index.html', (err, data) => {
       if (err) {
         res.statusCode = 404;
@@ -78,10 +78,27 @@ const server = http.createServer((req, res) => {
     })
     p.then(() => {
       let webhookData = req.body;
-      //let userName = webhookData.pusher.name;
-      //let repo = webhookData.repository.name;
-      console.log(webhookData);
+      let userName = webhookData.pusher.name;
+      let repo = webhookData.repository.name;
+
+      wrapper.authenticate();
+      wrapper.getCommits(userName, repo).then(result => {
+        console.log('promise');
+        commitFeed = JSON.stringify(JSON.parse(result), null, 2);
+        fs.readFile('./public/index.html', (err, data) => {
+          if (err) {
+            res.statusCode = 404;
+            res.statusMessage = 'Not Found';
+            throw err;
+          } else {  
+            //res.writeHead(200, _headers);
+            let body = data.toString().replace("{{commitFeed}}", commitFeed);
+            res.end(body);
+          }
+        })
+      });
     })
+    res.end('200 OK');
   } else {
     res.statusCode = 404;
     res.statusMessage = 'Not Found';
