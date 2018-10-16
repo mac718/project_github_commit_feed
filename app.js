@@ -32,7 +32,7 @@ var _extractPostData = (req, res, done) => {
   });
   req.on('end', () => {
     res.writeHead(200, _headers);
-    req.body = JSON.parse(body.slice(8));
+    req.body = JSON.parse(body.slice(7));
     done();
   });
 }
