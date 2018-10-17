@@ -52,7 +52,7 @@ const server = http.createServer((req, res) => {
           res.statusMessage = 'Not Found';
           throw err;
         } else {  
-          //res.writeHead(200, _headers);
+          res.writeHead(200, _headers);
           let body = data.toString().replace("{{commitFeed}}", commitFeed);
           res.end(body);
         }
